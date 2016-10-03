@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"R4DS\"\nauthor: \"Hennie Bezuidenhout\"\ndate: \"03 October 2016\"\noutput: word_document\n---\n## Programming in R STudio - Pipes\n# The point of the Pipe is to help us read our code in an easy to understand way!!\nWhen are we better off not using the Pipe ?\n\n 1) When Pipes are longer than ten steps (Rather create intermediate objects with meaningful names)\n 2) We have multiple inputs or outputs (the same solution as above applies)\n 3) When we are starting to think about a directed graph with a complex dependency structure",
+    "created" : 1475481203495.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3052969088",
+    "id" : "C56F4D00",
+    "lastKnownWriteTime" : 1475483106,
+    "last_content_update" : 1475483106593,
+    "path" : "~/GitHub/R4DS_LearnigCurve/Summary/Outline.RMD",
+    "project_path" : "Outline.RMD",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

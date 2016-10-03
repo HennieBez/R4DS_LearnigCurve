@@ -1,0 +1,13 @@
+---
+title: "R4DS"
+author: "Hennie Bezuidenhout"
+date: "03 October 2016"
+output: word_document
+---
+## Programming in R STudio - Pipes
+# The point of the Pipe is to help us read our code in an easy to understand way!!
+When are we better off not using the Pipe ?
+
+ 1) When Pipes are longer than ten steps (Rather create intermediate objects with meaningful names)
+ 2) We have multiple inputs or outputs (the same solution as above applies)
+ 3) When we are starting to think about a directed graph with a complex dependency structure
