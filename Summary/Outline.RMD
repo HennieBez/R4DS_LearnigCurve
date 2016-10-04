@@ -122,6 +122,23 @@ Every loop has 3 components:
 
 ##### Exercise Exercise Exercise Exercise 
 
+*mtcars is a preloaded dataset in R*
+
+- Let us compute the mean for this dataset via looping across the respective columns
+
+```{r}
+View(mtcars)
+
+firstever <- vector("double", ncol(mtcars))
+for (i in seq_along(mtcars)) {
+  
+  firstever[[i]] <- median(mtcars[[i]])
+}
+
+## It would be nice if I manage to show the Results in a Table format 
+
+```
+
 
 
 
