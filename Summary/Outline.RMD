@@ -146,6 +146,7 @@ firstever
 -Let us compete the number of unique observations in every column
 
 ```{r}
+
 View(iris)
 
 uniquely <- vector("integer",ncol(iris))
@@ -161,15 +162,128 @@ uniquely
 
 ```
 
+There are four variations to the basic for loop
+
+- Modifying an existing object, instead of creating a new object
+- Looping over names or values, instead of indices
+- Handling outputs of unknown length
+- Handling sequences of unknown length
+
+We need to analyse the ```while``` loop in more detail. I am not entirely sure how often we will be using it, but the R4DS only briefly touches on it. **I've openend up an ISSUE for this**
 
 
+### For loops vs. functionals
+
+For loops are not as important in R as they are in other languages because R is a functional programming language. 
+*This means that it is possible to wrap up for loops in a function, and CALL that function instead of using the for loop directly*
+
+One of the behaviours that makes R a functional programming language is the idea of passing a function to another function.
+
+```
+f1 <- function(x) abs(x - mean(x)) ^ 1
+f2 <- function(x) abs(x - mean(x)) ^ 2
+f3 <- function(x) abs(x - mean(x)) ^ 3
+
+```
+
+##### This can be rewritten as:
+
+```
+f <- function(x, i) abs(x - mean(x)) ^ i
+
+```
+
+##### Similarly:
+
+```
+col_mean <- function(df) {
+  output <- vector("double", length(df))
+  for (i in seq_along(df)) {
+    output[i] <- mean(df[[i]])
+  }
+  output
+}
+
+col_median <- function(df) {
+  output <- vector("double", length(df))
+  for (i in seq_along(df)) {
+    output[i] <- median(df[[i]])
+  }
+  output
+}
 
 
+col_sd <- function(df) {
+  output <- vector("double", length(df))
+  for (i in seq_along(df)) {
+    output[i] <- sd(df[[i]])
+  }
+  output
+}
+```
+
+##### This can be rewritten as:
+```
+col_summary <- function(df, fun) {
+  out <- vector("double", length(df))
+  for (i in seq_along(df)) {
+    out[i] <- fun(df[[i]])
+  }
+  out
+}
+```
+
+#### In which case we can simply call the function and specify the "calculation" needed going forward:
+
+```
+col_summary(df, median)
+#> [1]  0.237 -0.218  0.254 -0.133
+col_summary(df, mean)
+#> [1]  0.2026 -0.2068  0.1275 -0.0917
+
+```
+
+Let us next discuss ```purr``` package which provides functions that eliminate the need for many common loops. The ```apply``` family of functions in base R solve a similar problem, but ```purr``` is more consistent and thus easier to learn. 
+
+The goal of using ```purrr``` functions instead of for loops is to allow you break common list manipulation challenges into independent pieces:
+
+- How can you solve the problem for a single element of the list? Once you’ve solved that problem, ```purrr``` takes care of generalising your solution to every element in the list.
+
+- If you’re solving a complex problem, how can you break it down into bite-sized pieces that allow you to advance one small step towards a solution? With ```purrr```, you get lots of small pieces that you can compose together with the pipe.
+
+### The MAP Functions
+
+- ```map()``` makes a list
+- ```map_lgl()``` makes a logical vector
+- ```map_int()``` makes an integer vector
+- ```map_dbl()``` makes a double vector
+- ```map_chr()``` makes a character vector
+
+Each function takes a vector as input, applies a function to each piece, and then returns a *new vector* that’s the same length (and has the same names) as the input. The type of the vector is determined by the **suffix** to the map function.
+
+*Once you master these functions, you’ll find it takes much less time to solve iteration problems. But you should never feel bad about using a for loop instead of a map function. The map functions are a step up a tower of abstraction, and it can take a long time to get your head around how they work. The important thing is that you solve the problem that you’re working on, not write the most concise and elegant code (although that’s definitely something you want to strive towards!).*
+
+### This is incredible!!!
+
+```{r}
+library(purrr)
 
 
+map_dbl(mtcars, mean)
+
+MyIllusiveTable <- map_dbl(mtcars, mean)
+
+print(MyIllusiveTable)
+
+```
+
+### This is incredible!!!
 
 
-
+What are the differences between ```map()``` and ```col_summary``` ?
+- All ```purr``` functions are implemented in C
+- The second argument, the function to apply, can be a formula, a character vector, or an integer vector. 
+- Map functions also preserves names
 
 
 
