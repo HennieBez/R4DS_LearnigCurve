@@ -135,10 +135,31 @@ for (i in seq_along(mtcars)) {
   firstever[[i]] <- median(mtcars[[i]])
 }
 
+firstever
+
 ## It would be nice if I manage to show the Results in a Table format 
 
 ```
 
+*Iris is a preloaded dataset in R*
+
+-Let us compete the number of unique observations in every column
+
+```{r}
+View(iris)
+
+uniquely <- vector("integer",ncol(iris))
+for (i in seq_along(iris)) {
+  
+  uniquely[[i]] <- length(unique(iris[[i]]))
+  
+}
+
+uniquely
+
+## I like this
+
+```
 
 
 
