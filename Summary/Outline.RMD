@@ -266,6 +266,7 @@ Each function takes a vector as input, applies a function to each piece, and the
 ### This is incredible!!!
 
 ```{r}
+
 library(purrr)
 
 
@@ -286,7 +287,34 @@ What are the differences between ```map()``` and ```col_summary``` ?
 - Map functions also preserves names
 
 
+## Mapping over multiple arguments
 
+```map2()``` and ```pmap()``` helps us to map over multiple related inputs
+
+######Suppose we have 2 data lists:
+
+```{r}
+mu <- list(5, 10, -3) # Data list 1
+
+sigma <- list(1, 5, 10) # Data list 2
+
+
+```
+
+In order to generate random distributions for these 2 vectors, we can implement ```map2()```
+
+```{r}
+
+map2(mu, sigma, rnorm, n = 5) %>% str() 
+
+```
+
+But what happens behind the scenes ?
+
+```map2()``` generates this series of function calls:
+
+
+![map](http://r4ds.had.co.nz/diagrams/lists-map2.png)
 
 
 
