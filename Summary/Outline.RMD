@@ -316,6 +316,100 @@ But what happens behind the scenes ?
 
 ![map](http://r4ds.had.co.nz/diagrams/lists-map2.png)
 
+## Model!!
+
+![Model](http://r4ds.had.co.nz/diagrams/data-science-model.png)
+
+
+*The goal of a Model is to provide a simple low-dimensional summary of a dataset*
+
+The Model should capture the *signals* and ignore *noise*.
+
+We will focus on **predictive** models
+
+Our family of Models in R4DS will consist of 
+
+- Model Basics
+
+- Model Building
+
+- Many Models
+
+#### Hypothesis generation vs hypothesis confirmation
+
+We will primarily focus on Models for **EXPLORATION** as opposed to **CONFIRMATIOn**
+
+Note the following:
+
+- Each observation can either be used for exploration or confirmation, not both.
+
+- You can use an observation as many times as you like for exploration, but you can only use it once for confirmation. As soon as you use an observation twice, you’ve switched from confirmation to exploration.
+
+
+#### Model basics
+
+The goal of a model is to provide a simple low-dimensional summary of a dataset. In the context of this book we’re going to use models to partition data into patterns and residuals. Strong patterns will hide subtler trends, so we’ll use models to help peel back layers of structure as we explore a dataset.
+
+What are the 2 most important parts of a Model:
+
+1) First, you define a family of models that express a precise, but generic, pattern that you want to capture. For example, the pattern might be a straight line, or a quadatric curve. You will express the model family as an equation like y = a_1 * x + a_2 or y = a_1 * x ^ a_2. Here, x and y are known variables from your data, and a_1 and a_2 are parameters that can vary to capture different patterns.
+
+2) Next, you generate a fitted model by finding the model from the family that is the closest to your data. This takes the generic model family and makes it specific, like y = 3 * x + 7 or y = 9 * x ^ 2.
+
+```add_predictions()``` and ```add_residuals()``` to model data!!!
+
+
+Linear Trend Models: ```lm()``` *simply specify model and data*
+
+
+#### Nested Data
+
+You could imagine copy and pasting that code multiple times; but you’ve already learned a better way! Extract out the common code with a function and repeat using a ```map``` function from ```purrr```. This problem is structured a little differently to what you’ve seen before. Instead of repeating an action for each variable, we want to repeat an action for each country, a subset of rows. To do that, we need a new data structure: the nested data frame. To create a nested data frame we start with a grouped data frame, and “nest” it:
+
+**Note the difference between a standard grouped data frame and a nested data frame: in a grouped data frame, each row is an observation; in a nested data frame, each row is a group. Another way to think about a nested dataset is we now have a meta-observation: a row that represents the complete time course for a country, rather than a single point in time.**
+
+```broom:: glance``` provides a general set of model quality metrics.
+
+
+**The broom package provides three general tools for turning models into tidy data frames:**
+
+```broom::glance(model)``` returns a row for each model. Each column gives a model summary: either a measure of model quality, or complexity, or a combination of the two.
+
+```broom::tidy(model)`` returns a row for each coefficient in the model. Each column gives information about the estimate or its variability.
+
+```broom::augment(model, data)``` returns a row for each row in data, adding extra values like residuals, and influence statistics.
+
+
+
+
+## Communications:
+
+We know how **R markdown** works by now, but here is a god reminder:
+
+1. ```eval = FALSE``` prevents code from being evaluated. (And obviously if the code is not run, no results will be generated). This is useful for displaying example code, or for disabling a large block of code without commenting each line.
+
+1. ```include = FALSE``` runs the code, but doesn’t show the code or results in the final document. Use this for setup code that you don’t want cluttering your report.
+
+1. ```echo = FALSE``` prevents code, but not the results from appearing in the finished file. Use this when writing reports aimed at people who don’t want to see the underlying R code.
+
+1. ```message = FALSE``` or ```warning = FALSE``` prevents messages or warnings from appearing in the finished file.
+
+1. ```results = 'hide'``` hides printed output; fig.show = 'hide' hides plots.
+
+1. ```error = TRUE``` causes the render to continue even if code returns an error. This is rarely something you’ll want to include in the final version of your report, but can be very useful if you need to debug exactly what is going on inside your .Rmd. It’s also useful if you’re teaching R and want to deliberately include an error. The default, error = FALSE causes knitting to failure if there is a single error in the document.
+
+```ggplot themes``` :
+
+![Themes](http://r4ds.had.co.nz/images/visualization-themes.png)
+
+
+### Figure Sizing
+
+The biggest challenge of graphics in R Markdown is getting your figures the right size and shape. There are five main options that control figure sizing: ```fig.width```, ```fig.height```, ```fig.asp```, ```out.width``` and ```out.height```. Image sizing is challenging because there are two sizes (the size of the figure created by R and the size at which it is inserted in the output document), and multiple ways of specifying the size (i.e., height, width, and aspect ratio: pick two of three).
+
+
+
+
 
 
 
