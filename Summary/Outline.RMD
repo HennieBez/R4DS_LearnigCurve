@@ -384,7 +384,7 @@ You could imagine copy and pasting that code multiple times; but you’ve alread
 
 ## Communications:
 
-We know how **R markdown** works by now, but here is a god reminder:
+We know how **R markdown** works by now, but here is a good reminder:
 
 1. ```eval = FALSE``` prevents code from being evaluated. (And obviously if the code is not run, no results will be generated). This is useful for displaying example code, or for disabling a large block of code without commenting each line.
 
